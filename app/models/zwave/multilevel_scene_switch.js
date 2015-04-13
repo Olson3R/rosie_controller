@@ -3,7 +3,7 @@ var Base = require('./base')
 var util = require('util')
 var _ = require('underscore')
 
-var MultilevelSceneSwitch = function() {
+function MultilevelSceneSwitch(id, node) {
   Base.apply(this, arguments)
 }
 
