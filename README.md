@@ -1,2 +1,2 @@
-# rosie_controller
-Controller for the Rosie home automation collection.
+# rosie_webui
+A web interface for the Rosie home automation software.
