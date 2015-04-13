@@ -1,0 +1,25 @@
+{
+  "name": "rosie_controller",
+  "version": "0.0.1",
+  "description": "Home automation controller.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "home",
+    "automation",
+    "test"
+  ],
+  "author": "Scott Olson",
+  "license": "MIT",
+  "dependencies": {
+    "good": "^5.1.2",
+    "good-console": "^4.1.0",
+    "hapi": "^8.2.0",
+    "openzwave": "0.0.32",
+    "q": "^1.2.0",
+    "underscore": "^1.8.3",
+    "util": "^0.10.3"
+  }
+}
