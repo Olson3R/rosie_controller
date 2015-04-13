@@ -1,0 +1,18 @@
+{
+  "remotes": {
+    "receiver": {"title": "Receiver"},
+    "tv": {"title": "TV"},
+    "ps3": {"title": "PS3"}
+  },
+  "zwave": {
+    "config": {
+      "logging": false,
+      "consoleoutput": true,
+      "saveconfig": true,
+      "driverattempts": 3,
+      "pollinterval": 500,
+      "suppressrefresh": true
+    },
+    "usb_address": "/dev/ttyUSB0"
+  }
+}
