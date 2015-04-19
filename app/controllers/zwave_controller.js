@@ -12,7 +12,8 @@ handlers.index = {
 
 handlers.update = {
   handler: function(req, res) {
-    ZwaveBase.find(req.params.id).update(req.payload)
+    node = ZwaveBase.find(req.params.id)
+    node.update(req.payload)
     res()
   }
 }
