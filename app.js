@@ -8,7 +8,9 @@ var server = new Hapi.Server()
 server.connection({
   port: process.env.PORT || 4001,
   routes: {
-    cors: true,
+    cors: {
+      credentials: true
+    },
     files: {
       relativeTo: Path.join(__dirname, 'public')
     }
