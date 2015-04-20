@@ -1,5 +1,4 @@
 var ZwaveBase = require('../models/zwave/base')
-var _ = require('underscore')
 
 var handlers = {}
 
