@@ -1,4 +1,4 @@
-var zwave = require('../../../lib/zwave')
+var zwave = require('../../lib/zwave')
 var SwitchBinary = require('./classes/switch_binary')
 var SwitchMultilevel = require('./classes/switch_multilevel')
 var _ = require('underscore')
@@ -21,7 +21,7 @@ Base.find = function(id) {
 
 Base.lights = function() {
   return _.filter(Base.nodes(), function(node) {
-    return node.isLight() 
+    return node.isLight()
   })
 }
 
