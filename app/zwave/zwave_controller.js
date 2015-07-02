@@ -1,4 +1,4 @@
-var ZwaveBase = require('../models/zwave/base')
+var ZwaveBase = require('./base_model')
 
 var handlers = {}
 

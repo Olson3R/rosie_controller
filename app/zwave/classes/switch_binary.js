@@ -1,4 +1,4 @@
-var zwave = require('../../../../lib/zwave')
+var zwave = require('../../../lib/zwave')
 var _ = require('underscore')
 
 function SwitchBinary(node) {

@@ -1,5 +1,5 @@
-var remotesController = require('../app/controllers/remotes_controller')
-var zwaveController = require('../app/controllers/zwave_controller')
+var remotesController = require('../app/remotes/remotes_controller')
+var zwaveController = require('../app/zwave/zwave_controller')
 
 module.exports.routes = []
 
@@ -13,7 +13,7 @@ module.exports.routes.push({
 module.exports.routes.push({
   method: 'GET',
   path: '/remotes/{remote}',
-  config: remotesController.show
+  config: remotesController.sendCommand
 })
 
 // Z-Wave
