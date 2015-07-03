@@ -7,7 +7,7 @@ A web interface for the Rosie home automation software.
 3. Ethernet Connected IR Blaster: I have used [IRTrans Ethernet](http://www.irtrans.de/en/technicalinfo/lan.php)
 
 ## Setup
-1. Modify the [config]() file.
+1. Modify the [config](https://github.com/Olson3R/rosie_controller/blob/master/config/config.json) file.
 2. Run `npm install`
 
 ## Running the app
