@@ -2,8 +2,6 @@ var queueController = require('../app/queue/queue_controller')
 var remotesController = require('../app/remotes/remotes_controller')
 var zwaveController = require('../app/zwave/zwave_controller')
 
-var async = require('async')
-
 module.exports.routes = []
 
 // Queue
