@@ -1,7 +1,21 @@
+var queueController = require('../app/queue/queue_controller')
 var remotesController = require('../app/remotes/remotes_controller')
 var zwaveController = require('../app/zwave/zwave_controller')
 
 module.exports.routes = []
+
+// Queue
+module.exports.routes.push({
+  method: 'GET',
+  path: '/queue',
+  config: queueController.index
+})
+
+module.exports.routes.push({
+  method: 'POST',
+  path: '/queue/{jobType}',
+  config: queueController.create
+})
 
 // Remotes
 module.exports.routes.push({

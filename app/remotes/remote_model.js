@@ -27,7 +27,6 @@ var RemoteModel = {
     throw new Error("Invalid remote")
   },
   processResponse: function(res, body) {
-console.warn(res)
     if (res.statusCode != 200) {
       throw new Error("Non-200 response received: " + res.statusCode)
     }

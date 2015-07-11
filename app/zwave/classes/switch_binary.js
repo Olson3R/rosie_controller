@@ -1,4 +1,4 @@
-var zwave = require('../../../lib/zwave')
+var zwave = require('../../../lib/zwave').zwave
 var _ = require('underscore')
 
 function SwitchBinary(node) {
@@ -22,6 +22,10 @@ SwitchBinary.prototype.setSwitch = function(value) {
   } else {
     zwave.switchOff(this.node.id)
   }
+}
+
+SwitchBinary.prototype.turnOff = function() {
+  this.setSwitch({value: false})
 }
 
 module.exports = SwitchBinary

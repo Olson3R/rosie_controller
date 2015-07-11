@@ -1,6 +1,8 @@
 var Path = require('path')
 var Hapi = require('hapi')
+var async = require('async')
 var config = require('./config/config')
+var kue = require('./lib/kue')
 var zwave = require('./lib/zwave')
 
 // server
@@ -32,13 +34,17 @@ server.register(require('./config/plugins').plugins, function(err) {
 
   // start server
   server.start(function() {
-    zwave.connect()
+    zwave.start()
     console.info('Server started at ' + server.info.uri)
   })
 })
 
-process.on('SIGINT', function() {
-  console.log('zwave: disconnecting...')
-  zwave.disconnect()
-  process.exit()
+process.once('SIGINT', function(sig) {
+  async.parallel({
+    kue: kue.stop.bind(null, sig),
+    zwave: zwave.stop.bind(null, sig)
+  },
+  function(err, results) {
+    process.exit(0)
+  })
 })
