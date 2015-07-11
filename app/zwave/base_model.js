@@ -1,4 +1,4 @@
-var zwave = require('../../lib/zwave')
+var zwave = require('../../lib/zwave').zwave
 var SwitchBinary = require('./classes/switch_binary')
 var SwitchMultilevel = require('./classes/switch_multilevel')
 var _ = require('underscore')
