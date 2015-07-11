@@ -47,9 +47,22 @@ Base.prototype.update = function(payload) {
 }
 
 Base.prototype.isLight = function() {
+  return this.isSwitchBinary() || this.isSwitchMultilevel()
+}
+
+Base.prototype.isSwitchBinary = function() {
   classes = this.classes
-  var ret = classes && (!_.isEmpty(classes['37']) || !_.isEmpty(classes['38']))
-  return ret
+  return classes && !_.isEmpty(classes['37'])
+}
+
+Base.prototype.isSwitchMultilevel = function() {
+  classes = this.classes
+  return classes && !_.isEmpty(classes['38'])
+}
+
+Base.prototype.turnOff = function() {
+ if(this.isSwitchBinary()) new SwitchBinary(this).turnOff()
+ if(this.isSwitchMultilevel()) new SwitchMultilevel(this).turnOff()
 }
 
 module.exports = Base

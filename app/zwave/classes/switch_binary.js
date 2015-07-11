@@ -24,4 +24,8 @@ SwitchBinary.prototype.setSwitch = function(value) {
   }
 }
 
+SwitchBinary.prototype.turnOff = function() {
+  this.setSwitch({value: false})
+}
+
 module.exports = SwitchBinary
