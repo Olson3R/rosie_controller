@@ -1,9 +1,9 @@
 {
   "IR_TRANSMITTER_URL": "http://192.168.8.12/send.htm",
   "REMOTE_LIST": [
-    {"key": "receiver", "title": "Receiver", "remote_key": "denon avr-988"},
-    {"key": "tv", "title": "TV", "remote_key": "samsung ln46a750"},
-    {"key": "ps3", "title": "PS3", "remote_key": "ps3"}
+    {"id": "receiver", "title": "Receiver", "key": "denon avr-988"},
+    {"id": "tv", "title": "TV", "key": "samsung ln46a750"},
+    {"id": "ps3", "title": "PS3", "key": "ps3"}
   ],
   "zwave": {
     "config": {

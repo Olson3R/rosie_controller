@@ -10,12 +10,12 @@ var RemoteModel = {
     return remoteList
   },
   sendCommand: function(remoteKey, command) {
-    var remote = RemoteModel.findRemote(remoteKey)
+    var remote = RemoteModel.findRemote(id)
     if (remote) {
       var requestOptions = {
         url: irTransmitterUrl,
         qs: {
-          remote: remote.remote_key,
+          remote: remote.key,
           command: command
         },
         method: 'GET'
@@ -33,8 +33,8 @@ var RemoteModel = {
 
     return body
   },
-  findRemote: function(key) {
-    return _.findWhere(remoteList, {key: key})
+  findRemote: function(id) {
+    return _.findWhere(remoteList, {id: id})
   }
 }
 

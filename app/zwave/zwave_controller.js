@@ -12,7 +12,7 @@ handlers.update = {
   handler: function(req, res) {
     node = ZwaveBase.find(req.params.id)
     node.update(req.payload)
-    res()
+    res(node)
   }
 }
 

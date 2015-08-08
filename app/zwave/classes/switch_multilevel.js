@@ -21,6 +21,7 @@ SwitchMultilevel.prototype.setLevel = function(value) {
   if (typeof level === 'undefined' || level < 0 || level > 99) return
 
   zwave.setLevel(this.node.id, level)
+  this.node.classes['38']['0'].value = level
 }
 
 SwitchMultilevel.prototype.turnOff = function() {
