@@ -1,19 +1,22 @@
-var bluebird = require('bluebird')
+var Promise = require('bluebird')
 var _ = require('underscore')
 var kue = require('../../../lib/kue').kue
 var queue = require('../../../lib/kue').queue
+var Queue = require('../queue')
 var remoteModel = require('../../remotes/remote_model')
 var zwaveModel = require('../../zwave/base_model')
 
 var FellAsleepAid = {
   jobType: 'fell_asleep_aid',
   create: function(data) {
-    findExisting(function(err, jobs) {
+    return new Promise(function(resolve, reject) {
+      findExisting(function(err, jobs) {
         _.each(jobs, function(job) {
           job.remove(_.noop)
         })
-        create(data)
+        resolve(create(data))
       })
+    })
   },
   createNext: function() {
     findExisting(function(err, jobs) {
@@ -45,16 +48,19 @@ function turnOffDevices() {
 }
 
 function create(data) {
-  var run_at = _.result(data, 'run_at') || nextRunAt()
-  queue.create(FellAsleepAid.jobType)
-    .delay(run_at)
-    .removeOnComplete(true)
-    .save()
+  return new Promise(function(resolve, reject) {
+    var promote_at = toDate(_.result(data, 'promote_at')) || nextRunAt()
+    var job = queue.create(FellAsleepAid.jobType)
+      .delay(promote_at)
+      .removeOnComplete(true)
+      .save(function(err) {
+        resolve(job)
+      })
+  })
 }
 
 function findExisting(done) {
-  // bluebird.promisify(kue.Job.rangeByType(FellAsleepAid.jobType, 'delayed', 0, 1000, 'asc'))
-  kue.Job.rangeByType(FellAsleepAid.jobType, 'delayed', 0, 1000, 'asc', done)
+  Queue.findExisting(FellAsleepAid.jobType, done)
 }
 
 function nextRunAt() {
@@ -64,6 +70,12 @@ function nextRunAt() {
   }
   date.setHours(2, 0, 0, 0)
   return date
+}
+
+function toDate(timestampInt) {
+  timestampInt = parseInt(timestampInt)
+  if (!timestampInt) { return null }
+  return new Date(timestampInt)
 }
 
 module.exports = FellAsleepAid

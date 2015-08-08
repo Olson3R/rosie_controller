@@ -1,8 +1,6 @@
 var _ = require('underscore')
-var kue = require('../../lib/kue').kue
-var queue = require('../../lib/kue').queue
+var Queue = require('./queue')
 
-// workers
 var workers = {
   fell_asleep_aid: require('./workers/fell_asleep_aid')
 }
@@ -11,7 +9,7 @@ var handlers = {}
 
 handlers.index = {
   handler: function(req, res) {
-    kue.Job.rangeByType('fell_asleep_aid', 'delayed', 0, 100, 'asc', function(err, jobs) {
+    Queue.listAll(function(err, jobs) {
       res(jobs)
     })
   }
@@ -19,13 +17,39 @@ handlers.index = {
 
 handlers.create = {
   handler: function(req, res) {
-    var worker = _.result(workers, req.params.jobType)
+    var jobData = req.payload
+    var worker = _.result(workers, jobData.type)
     if (worker) {
-      var job = worker.create(req.payload)
-      res(job).code(201)
+      var newJob = worker.create(jobData)
+      res(newJob).code(201)
     } else {
       res('invalid_job_type').code(422)
     }
+  }
+}
+
+handlers.update = {
+  handler: function(req, res) {
+    var jobData = req.payload
+    var worker = _.result(workers, jobData.type)
+    if (worker) {
+      worker.create(jobData)
+        .then(function(job) {
+          res(job).code(201)
+        })
+        .catch(function(err) {
+          res(err).code(500)
+        })
+    } else {
+      res('invalid_job_type').code(422)
+    }
+  }
+}
+
+handlers.delete = {
+  handler: function(req, res) {
+    Queue.removeJob(req.params.id)
+    res().code(204)
   }
 }
 
