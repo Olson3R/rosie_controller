@@ -13,8 +13,20 @@ module.exports.routes.push({
 
 module.exports.routes.push({
   method: 'POST',
-  path: '/queue/{jobType}',
+  path: '/queue',
   config: queueController.create
+})
+
+module.exports.routes.push({
+  method: 'PUT',
+  path: '/queue/{id}',
+  config: queueController.update
+})
+
+module.exports.routes.push({
+  method: 'DELETE',
+  path: '/queue/{id}',
+  config: queueController.delete
 })
 
 // Remotes
