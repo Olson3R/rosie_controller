@@ -20,8 +20,13 @@ handlers.create = {
     var jobData = req.payload
     var worker = _.result(workers, jobData.type)
     if (worker) {
-      var newJob = worker.create(jobData)
-      res(newJob).code(201)
+      worker.create(jobData)
+        .then(function(job) {
+          res(job).code(201)
+        })
+        .catch(function(err) {
+          res(err).code(500)
+        })
     } else {
       res('invalid_job_type').code(422)
     }

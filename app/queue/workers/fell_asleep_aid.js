@@ -54,7 +54,11 @@ function create(data) {
       .delay(promote_at)
       .removeOnComplete(true)
       .save(function(err) {
-        resolve(job)
+        if (err) {
+          reject(err)
+        } else {
+          resolve(job)
+        }
       })
   })
 }
