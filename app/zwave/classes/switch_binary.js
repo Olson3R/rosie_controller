@@ -19,8 +19,10 @@ SwitchBinary.prototype.update = function(attrs) {
 SwitchBinary.prototype.setSwitch = function(value) {
   if (_.result(value, 'value')) {
     zwave.switchOn(this.node.id)
+    this.node.classes['37']['0'].value = true
   } else {
     zwave.switchOff(this.node.id)
+    this.node.classes['37']['0'].value = false
   }
 }
 
