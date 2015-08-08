@@ -15,7 +15,6 @@ var Queue = {
     })
   },
   findExisting: function(jobType, done) {
-    // bluebird.promisify(kue.Job.rangeByType(jobType, 'delayed', 0, 1000, 'asc'))
     kue.Job.rangeByType(jobType, 'delayed', 0, 1000, 'asc', done)
   }
 }
