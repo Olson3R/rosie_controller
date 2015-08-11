@@ -37,8 +37,8 @@ module.exports.routes.push({
 })
 
 module.exports.routes.push({
-  method: 'GET',
-  path: '/remotes/{remote}',
+  method: 'PUT',
+  path: '/remotes/{id}',
   config: remotesController.sendCommand
 })
 
