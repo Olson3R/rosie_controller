@@ -10,11 +10,11 @@ handlers.index = {
 
 handlers.sendCommand = {
   handler: function(req, res) {
-    RemoteModel.sendCommand(req.params.remote, req.query.command)
+    RemoteModel.sendCommand(req.params.id, req.payload.command)
     res()
   },
   validate: {
-    query: {
+    payload: {
       command: Joi.string()
     }
   }

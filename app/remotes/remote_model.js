@@ -9,7 +9,7 @@ var RemoteModel = {
   list: function() {
     return remoteList
   },
-  sendCommand: function(remoteKey, command) {
+  sendCommand: function(id, command) {
     var remote = RemoteModel.findRemote(id)
     if (remote) {
       var requestOptions = {
