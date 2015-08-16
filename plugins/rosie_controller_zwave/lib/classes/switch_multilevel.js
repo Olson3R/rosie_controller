@@ -1,8 +1,9 @@
-var zwave = require('../../../lib/zwave').zwave
+var zwave = require('../zwave').zwave
 var _ = require('underscore')
 
-function SwitchMultilevel(node) {
+function SwitchMultilevel(node, zwave) {
   this.node = node
+  this.zwave = zwave
 }
 
 SwitchMultilevel.prototype.update = function(attrs) {
@@ -20,7 +21,7 @@ SwitchMultilevel.prototype.setLevel = function(value) {
   var level = _.result(value, 'value')
   if (typeof level === 'undefined' || level < 0 || level > 99) return
 
-  zwave.setLevel(this.node.id, level)
+  this.zwave.setLevel(this.node.id, level)
   this.node.classes['38']['0'].value = level
 }
 

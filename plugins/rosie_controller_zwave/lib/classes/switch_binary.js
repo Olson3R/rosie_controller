@@ -1,8 +1,8 @@
-var zwave = require('../../../lib/zwave').zwave
 var _ = require('underscore')
 
-function SwitchBinary(node) {
+function SwitchBinary(node, zwave) {
   this.node = node
+  this.zwave = zwave
 }
 
 SwitchBinary.prototype.update = function(attrs) {
@@ -18,10 +18,10 @@ SwitchBinary.prototype.update = function(attrs) {
 
 SwitchBinary.prototype.setSwitch = function(value) {
   if (_.result(value, 'value')) {
-    zwave.switchOn(this.node.id)
+    this.zwave.switchOn(this.node.id)
     this.node.classes['37']['0'].value = true
   } else {
-    zwave.switchOff(this.node.id)
+    this.zwave.switchOff(this.node.id)
     this.node.classes['37']['0'].value = false
   }
 }

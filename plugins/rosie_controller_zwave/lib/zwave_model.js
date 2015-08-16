@@ -1,22 +1,29 @@
-var zwave = require('../../lib/zwave').zwave
 var SwitchBinary = require('./classes/switch_binary')
 var SwitchMultilevel = require('./classes/switch_multilevel')
 var _ = require('underscore')
 
-function Base(id, node) {
+var _zwave = null
+
+function Base(id) {
   this.id = id
 }
 
-Base.create = function(id, node) {
-  return _.extend(new Base(id), node)
+Base.setZwave = function(zwave) {
+  _zwave = zwave
 }
 
 Base.find = function(id) {
   id = parseInt(id, 10)
-  node = zwave.nodes[id]
+  node = _zwave.nodes[id]
   if (node) {
     return Base.create(id, node)
   }
+}
+
+Base.nodes = function() {
+  return _.map(_zwave.nodes, function(node, index) {
+    return Base.create(index, node)
+  })
 }
 
 Base.lights = function() {
@@ -25,10 +32,8 @@ Base.lights = function() {
   })
 }
 
-Base.nodes = function() {
-  return _.map(zwave.nodes, function(node, index) {
-    return Base.create(index, node)
-  })
+Base.create = function(id, node) {
+  return _.extend(new Base(id), node)
 }
 
 Base.prototype.update = function(payload) {
@@ -37,10 +42,10 @@ Base.prototype.update = function(payload) {
   _.each(classes, function(value, key) {
     switch(key) {
       case '37': // COMMAND_CLASS_SWITCH_BINARY
-        new SwitchBinary(self).update(value)
+        new SwitchBinary(self, _zwave).update(value)
         break
       case '38': // COMMAND_CLASS_SWITCH_MULTILEVEL
-        new SwitchMultilevel(self).update(value)
+        new SwitchMultilevel(self, _zwave).update(value)
         break
     }
   })
@@ -61,8 +66,8 @@ Base.prototype.isSwitchMultilevel = function() {
 }
 
 Base.prototype.turnOff = function() {
- if(this.isSwitchBinary()) new SwitchBinary(this).turnOff()
- if(this.isSwitchMultilevel()) new SwitchMultilevel(this).turnOff()
+ if (this.isSwitchBinary()) new SwitchBinary(this, _zwave).turnOff()
+ if (this.isSwitchMultilevel()) new SwitchMultilevel(this, _zwave).turnOff()
 }
 
 module.exports = Base
