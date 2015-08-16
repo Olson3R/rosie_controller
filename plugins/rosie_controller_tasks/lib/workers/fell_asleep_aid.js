@@ -1,13 +1,24 @@
 var Promise = require('bluebird')
 var _ = require('underscore')
-var kue = require('../../../lib/kue').kue
-var queue = require('../../../lib/kue').queue
-var Queue = require('../queue')
-var remoteModel = require('../../remotes/remote_model')
-var zwaveModel = require('../../zwave/base_model')
+var Kue = require('../kue')
+var TaskModel = require('../task_model')
 
 var FellAsleepAid = {
   jobType: 'fell_asleep_aid',
+  ZwaveModel: null,
+  RemoteModel: null,
+  setup: function(ZwaveModel, RemoteModel) {
+    FellAsleepAid.ZwaveModel = ZwaveModel
+    FellAsleepAid.RemoteModel = RemoteModel
+    Kue.queue.process('fell_asleep_aid', 1, function(job, done) {
+      console.log('FellAsleepAid: begin')
+      turnOffLights()
+      turnOffDevices()
+      FellAsleepAid.createNext()
+      console.log('FellAsleepAid: end')
+      done()
+    })
+  },
   create: function(data) {
     return new Promise(function(resolve, reject) {
       findExisting(function(err, jobs) {
@@ -20,37 +31,28 @@ var FellAsleepAid = {
   },
   createNext: function() {
     findExisting(function(err, jobs) {
-        if (jobs.length === 0) {
-          create()
-        }
-      })
+      if (jobs.length === 0) {
+        create()
+      }
+    })
   }
 }
 
-queue.process('fell_asleep_aid', 1, function(job, done) {
-  console.log('FellAsleepAid: begin')
-  turnOffLights()
-  turnOffDevices()
-  FellAsleepAid.createNext()
-  console.log('FellAsleepAid: end')
-  done()
-})
-
 function turnOffLights() {
-  _.each(zwaveModel.lights(), function(light) {
+  _.each(FellAsleepAid.ZwaveModel.lights(), function(light) {
     light.turnOff()
   })
 }
 
 function turnOffDevices() {
-  remoteModel.sendCommand('receiver', 'power off')
-  remoteModel.sendCommand('tv', 'power off')
+  FellAsleepAid.RemoteModel.sendCommand('receiver', 'power off')
+  FellAsleepAid.RemoteModel.sendCommand('tv', 'power off')
 }
 
 function create(data) {
   return new Promise(function(resolve, reject) {
     var promote_at = toDate(_.result(data, 'promote_at')) || nextRunAt()
-    var job = queue.create(FellAsleepAid.jobType)
+    var job = Kue.queue.create(FellAsleepAid.jobType)
       .delay(promote_at)
       .removeOnComplete(true)
       .save(function(err) {
@@ -64,7 +66,7 @@ function create(data) {
 }
 
 function findExisting(done) {
-  Queue.findExisting(FellAsleepAid.jobType, done)
+  TaskModel.findExisting(FellAsleepAid.jobType, done)
 }
 
 function nextRunAt() {
