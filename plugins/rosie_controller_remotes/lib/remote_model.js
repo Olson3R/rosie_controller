@@ -2,18 +2,22 @@ var url = require('url')
 var bluebird = require('bluebird')
 var request = bluebird.promisify(require('request'))
 var _ = require('underscore')
-var remoteList = require('../../config/config').REMOTE_LIST
-var irTransmitterUrl = require('../../config/config').IR_TRANSMITTER_URL
 
 var RemoteModel = {
+  remoteList: [],
+  irTransmitterUrl: null,
+  configure: function(options) {
+    this.remoteList = options.REMOTE_LIST
+    this.irTransmitterUrl = options.IR_TRANSMITTER_URL
+  },
   list: function() {
-    return remoteList
+    return RemoteModel.remoteList
   },
   sendCommand: function(id, command) {
     var remote = RemoteModel.findRemote(id)
     if (remote) {
       var requestOptions = {
-        url: irTransmitterUrl,
+        url: RemoteModel.irTransmitterUrl,
         qs: {
           remote: remote.key,
           command: command
@@ -34,7 +38,7 @@ var RemoteModel = {
     return body
   },
   findRemote: function(id) {
-    return _.findWhere(remoteList, {id: id})
+    return _.findWhere(RemoteModel.remoteList, {id: id})
   }
 }
 
