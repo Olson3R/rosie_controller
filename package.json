@@ -4,7 +4,8 @@
   "description": "Home automation controller.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/rejoice/bin/rejoice -c index.json -p ./"
   },
   "keywords": [
     "home",
@@ -14,15 +15,15 @@
   "author": "Scott Olson",
   "license": "MIT",
   "dependencies": {
-    "async": "^1.3.0",
-    "bluebird": "^2.9.32",
-    "good": "^5.1.2",
-    "good-console": "^4.1.0",
+    "async": "^1.4.2",
+    "bluebird": "^2.9.34",
+    "good": "^6.3.0",
+    "good-console": "^5.0.3",
     "hapi": "^8.2.0",
     "joi": "^6.5.0",
     "kue": "^0.9.3",
     "openzwave": "0.0.32",
-    "q": "^1.2.0",
+    "rejoice": "^2.0.1",
     "request": "^2.58.0",
     "underscore": "^1.8.3",
     "url": "^0.10.3",

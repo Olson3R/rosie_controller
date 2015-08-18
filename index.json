@@ -18,7 +18,7 @@
     }
   ],
   "plugins": {
-    "./node_modules/good": {
+    "good": {
       "reporters": [
         {
           "reporter": "good-console",
