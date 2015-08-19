@@ -5,9 +5,6 @@
       "routes": {
         "cors": {
           "credentials": true
-        },
-        "files": {
-          "relativeTo": "./public"
         }
       },
       "router": {
@@ -31,7 +28,7 @@
         }
       ]
     },
-    "./plugins/rosie_controller_remotes": {
+    "rosie_controller_remotes": {
       "IR_TRANSMITTER_URL": "http://192.168.8.12/send.htm",
       "REMOTE_LIST": [
         {"id": "receiver", "title": "Receiver", "key": "denon avr-988"},
@@ -39,7 +36,7 @@
         {"id": "ps3", "title": "PS3", "key": "ps3"}
       ]
     },
-    "./plugins/rosie_controller_zwave": {
+    "rosie_controller_zwave": {
         "config": {
         "logging": false,
         "consoleoutput": true,
@@ -50,7 +47,7 @@
       },
       "USB_ADDRESS": "/dev/aeon_z_stick"
     },
-    "./plugins/rosie_controller_tasks": {
+    "rosie_controller_tasks": {
       "KUE_LISTEN_PORT": 4002
     }
   }
