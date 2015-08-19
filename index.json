@@ -1,0 +1,54 @@
+{
+  "connections": [
+    {
+      "port": 4001,
+      "routes": {
+        "cors": {
+          "credentials": true
+        }
+      },
+      "router": {
+        "isCaseSensitive": false,
+        "stripTrailingSlash": true
+      },
+      "labels": ["api", "rest", "controller"]
+    }
+  ],
+  "plugins": {
+    "good": {
+      "reporters": [
+        {
+          "reporter": "good-console",
+          "events": {
+            "response": "*",
+            "ops": "*",
+            "error": "*",
+            "log": "*"
+          }
+        }
+      ]
+    },
+    "rosie_controller_remotes": {
+      "IR_TRANSMITTER_URL": "http://192.168.8.12/send.htm",
+      "REMOTE_LIST": [
+        {"id": "receiver", "title": "Receiver", "key": "denon avr-988"},
+        {"id": "tv", "title": "TV", "key": "samsung ln46a750"},
+        {"id": "ps3", "title": "PS3", "key": "ps3"}
+      ]
+    },
+    "rosie_controller_zwave": {
+        "config": {
+        "logging": false,
+        "consoleoutput": true,
+        "saveconfig": true,
+        "driverattempts": 3,
+        "pollinterval": 500,
+        "suppressrefresh": true
+      },
+      "USB_ADDRESS": "/dev/aeon_z_stick"
+    },
+    "rosie_controller_tasks": {
+      "KUE_LISTEN_PORT": 4002
+    }
+  }
+}

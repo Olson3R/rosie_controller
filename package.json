@@ -2,30 +2,33 @@
   "name": "rosie_controller",
   "version": "0.0.1",
   "description": "Home automation controller.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "author": "Scott Olson",
+  "license": "MIT",
   "keywords": [
     "home",
     "automation",
-    "test"
+    "rosie"
   ],
-  "author": "Scott Olson",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Olson3R/rosie_controller"
+  },
+  "bugs": {
+    "url": "https://github.com/Olson3R/rosie_controller/issues"
+  },
+  "homepage": "https://github.com/Olson3R/rosie_controller",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/rejoice/bin/rejoice -c index.json"
+  },
   "dependencies": {
-    "async": "^1.3.0",
-    "bluebird": "^2.9.32",
-    "good": "^5.1.2",
-    "good-console": "^4.1.0",
+    "good": "^6.3.0",
+    "good-console": "^5.0.3",
     "hapi": "^8.2.0",
-    "joi": "^6.5.0",
-    "kue": "^0.9.3",
-    "openzwave": "0.0.32",
-    "q": "^1.2.0",
-    "request": "^2.58.0",
-    "underscore": "^1.8.3",
-    "url": "^0.10.3",
-    "util": "^0.10.3"
+    "rejoice": "^2.0.1",
+    "rosie_controller_remotes": "^v0.1.0",
+    "rosie_controller_tasks": "^v0.1.0",
+    "rosie_controller_zwave": "^v0.1.0"
   }
 }
