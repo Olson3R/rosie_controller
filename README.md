@@ -1,5 +1,5 @@
 # rosie_controller
-A rest API for the Rosie home automation software. This does not actually provide any functionality without adding plugins.
+A rest API for the Rosie home automation software. This does not actually provide any functionality without adding plugins. The plugins are built for [hapijs](http://hapijs.com/) and are intended to be run with [rejoice](https://github.com/hapijs/rejoice).
 
 ## Plugins
 * [rosie_controller_remotes](https://github.com/Olson3R/rosie_controller_remotes)
