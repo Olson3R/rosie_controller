@@ -1,15 +1,28 @@
-# rosie_webui
-A web interface for the Rosie home automation software.
+# rosie_controller
+A rest API for the Rosie home automation software. This does not actually provide any functionality without adding plugins.
+
+## Plugins
+* [rosie_controller_remotes](https://github.com/Olson3R/rosie_controller_remotes)
+ * Adds the ability to interface with IR controlled devices
+ * Adds /remotes endpoints
+ * Requires physical hardware
+* [rosie_controller_tasks](https://github.com/Olson3R/rosie_controller_tasks)
+ * Adds the ability to interface with Z-Wave devices
+ * Adds /zwave endpoints
+ * Requires physical hardware
+* [rosie_controller_zwave](https://github.com/Olson3R/rosie_controller_zwave)
+ * Adds the ability to interface with Z-Wave devices
+ * Adds /zwave endpoints
+ * Currently depends on [rosie_controller_remotes](https://github.com/Olson3R/rosie_controller_remotes) and [rosie_controller_tasks](https://github.com/Olson3R/rosie_controller_tasks)
 
 ## Dependencies
-1. Node: Requires `0.10.x` for `node-openzwave`.
-2. Z-Wave Controller: I have used the [Aeon Labs: Z-Stick](http://aeotec.com/z-wave-usb-stick).
-3. Ethernet Connected IR Blaster: I have used [IRTrans Ethernet](http://www.irtrans.de/en/technicalinfo/lan.php)
+1. Node: Requires `0.10.x` for [rosie_controller_zwave](https://github.com/Olson3R/rosie_controller_zwave).
+2. Some plugins require physical hardware
 
 ## Setup
-1. Modify the [config](https://github.com/Olson3R/rosie_controller/blob/master/config/config.json) file.
-2. Run `npm install`
+1. Modify the [package.json](https://github.com/Olson3R/rosie_controller/blob/master/package.json) file to include the plugins you want to include.
+2. Modify the [rejoice config](https://github.com/Olson3R/rosie_controller/blob/master/index.json) file to include and configure the plugins you want to include.
+3. Run `npm install`
 
 ## Running the app
-1. Run `node index.js`
-  * If you are developing, you may want to use something like `nodemon` to automatically reload the app when you make changes.
+1. Run `npm start`
