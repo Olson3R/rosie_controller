@@ -7,9 +7,8 @@ A rest API for the Rosie home automation software. This does not actually provid
  * Adds /remotes endpoints
  * Requires physical hardware
 * [rosie_controller_tasks](https://github.com/Olson3R/rosie_controller_tasks)
- * Adds the ability to interface with Z-Wave devices
- * Adds /zwave endpoints
- * Requires physical hardware
+ * Adds the ability to CRUD tasks and process tasks.
+ * Adds /queue endpoints
 * [rosie_controller_zwave](https://github.com/Olson3R/rosie_controller_zwave)
  * Adds the ability to interface with Z-Wave devices
  * Adds /zwave endpoints
