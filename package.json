@@ -23,12 +23,14 @@
     "start": "./node_modules/rejoice/bin/rejoice -c index.json"
   },
   "dependencies": {
+    "bluebird": "^2.9.34",
     "good": "^6.3.0",
     "good-console": "^5.0.3",
     "hapi": "^8.2.0",
     "rejoice": "^2.0.1",
     "rosie_controller_remotes": "^v0.1.0",
     "rosie_controller_tasks": "^v0.1.0",
-    "rosie_controller_zwave": "^v0.1.0"
+    "rosie_controller_zwave": "^v0.1.0",
+    "underscore": "^1.8.3"
   }
 }
