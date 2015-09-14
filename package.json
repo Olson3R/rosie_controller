@@ -30,7 +30,7 @@
     "rejoice": "^2.0.1",
     "rosie_controller_remotes": "^v0.1.0",
     "rosie_controller_tasks": "^v0.1.0",
-    "rosie_controller_zwave": "^v0.1.0",
+    "rosie_controller_zwave": "^v0.2.0",
     "underscore": "^1.8.3"
   }
 }
